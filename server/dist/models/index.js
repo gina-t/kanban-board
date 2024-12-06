@@ -1,3 +1,4 @@
+// This file is responsible for initializing Sequelize and setting up the associations between the User and Ticket models.
 import dotenv from 'dotenv';
 dotenv.config();
 import { Sequelize } from 'sequelize';

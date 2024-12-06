@@ -57,7 +57,30 @@ npm install jwt-decode react react-dom react-router-dom vite
 
 6. Download PostgreSQL from https://www.postgresql.org/download/ for your OS and generate a password
 
-7. Generate a secure random string to use as JWT secret key and store in .env file. In root directory:
+7. Open a PostgreSQL interactive terminal and connect to kanaban_db:
+
+```zsh
+
+psql -U postgres
+\l
+\c kanban_db
+'You are now connected to database "kanban_db" as user "postgres"'
+\i ./server/db/schema.sql
+\i ./server/src/seeds.sql
+
+```
+
+8. In root directory run the seed script:
+
+```zsh
+
+npm run seed
+
+```
+
+9. Create and initialise kanban_db using psql and Sequelize
+
+10. Generate a secure random string to use as JWT secret key and store in .env file. In root directory:
 
 ```zsh
 

@@ -1,3 +1,4 @@
+// user model
 import { DataTypes, Model } from 'sequelize';
 import bcrypt from 'bcrypt';
 export class User extends Model {
@@ -17,6 +18,7 @@ export function UserFactory(sequelize) {
         username: {
             type: DataTypes.STRING,
             allowNull: false,
+            unique: true,
         },
         password: {
             type: DataTypes.STRING,
@@ -30,9 +32,11 @@ export function UserFactory(sequelize) {
                 await user.setPassword(user.password);
             },
             beforeUpdate: async (user) => {
-                await user.setPassword(user.password);
+                if (user.changed('password')) {
+                    await user.setPassword(user.password);
+                }
             },
-        }
+        },
     });
     return User;
 }
