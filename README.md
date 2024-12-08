@@ -125,10 +125,16 @@ npm run start:dev
 12. In root build the app:
 
 ```zsh
+
 npm run build
 
 ```
-13. Deploy to Render 
+13.Render Configuration
+
+Build command: npm run render-build
+
+Start command: npm start
+
 
 ## Usage
 
