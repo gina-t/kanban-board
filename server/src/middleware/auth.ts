@@ -1,6 +1,7 @@
 import { Request, Response, NextFunction } from 'express';
 import jwt, { JwtPayload } from 'jsonwebtoken';
 
+// Define a custom interface that extends JwtPayload
 interface CustomJwtPayload extends JwtPayload {
   username: string;
 }
@@ -19,7 +20,7 @@ export const authenticateToken = (req: Request, res: Response, next: NextFunctio
       res.sendStatus(403);
       return;
     }
-    req.user = user as CustomJwtPayload;
+    req.user = user as CustomJwtPayload; // Use the custom interface
     next();
   });
 };

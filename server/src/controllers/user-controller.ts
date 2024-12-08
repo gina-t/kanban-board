@@ -9,7 +9,8 @@ export const getAllUsers = async (_req: Request, res: Response) => {
     });
     res.json(users);
   } catch (error: any) {
-    res.status(500).json({ message: error.message });
+    console.error('Error fetching users:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
 
@@ -26,7 +27,8 @@ export const getUserById = async (req: Request, res: Response) => {
       res.status(404).json({ message: 'User not found' });
     }
   } catch (error: any) {
-    res.status(500).json({ message: error.message });
+    console.error('Error fetching user by ID:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };
 
@@ -37,7 +39,8 @@ export const createUser = async (req: Request, res: Response) => {
     const newUser = await User.create({ username, password });
     res.status(201).json(newUser);
   } catch (error: any) {
-    res.status(400).json({ message: error.message });
+    console.error('Error creating user:', error);
+    res.status(400).json({ message: 'Bad request' });
   }
 };
 
@@ -56,6 +59,7 @@ export const updateUser = async (req: Request, res: Response) => {
       res.status(404).json({ message: 'User not found' });
     }
   } catch (error: any) {
+    console.error('Error updating user:', error);
     res.status(400).json({ message: error.message });
   }
 };
@@ -67,11 +71,12 @@ export const deleteUser = async (req: Request, res: Response) => {
     const user = await User.findByPk(id);
     if (user) {
       await user.destroy();
-      res.json({ message: 'User deleted' });
+      res.json({ message: 'User deleted successfully' });
     } else {
       res.status(404).json({ message: 'User not found' });
     }
   } catch (error: any) {
-    res.status(500).json({ message: error.message });
+    console.error('Error deleting user:', error);
+    res.status(500).json({ message: 'Internal server error' });
   }
 };

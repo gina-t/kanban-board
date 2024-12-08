@@ -33,8 +33,7 @@ git clone git@github.com:gina-t/kanban-board.git
 
 ```zsh
 
-npm install sequelize pg jsonwebtoken bcrypt 
-npm install --save-dev prettier eslint-config-prettier
+npm install --save-dev concurrently eslint-config-prettier nodemon prettier typescript wait-on
 
 ```
 4. Server package.json
@@ -42,7 +41,8 @@ npm install --save-dev prettier eslint-config-prettier
 ```zsh
 
 cd server
-npm install dotenv express
+npm install cors dotenv express sequelize pg jsonwebtoken bcrypt
+npm install --save-dev @types/cors @types/bcrypt
 
 ```
 
@@ -51,26 +51,51 @@ npm install dotenv express
 ```zsh
 
 cd client
-npm install jwt-decode react react-dom react-router-dom vite
+npm install jwt-decode react react-dom react-router-dom 
+npm install --save-dev @types/react @types/react-dom @typescript-eslint @vitejs/plugin-react eslint eslint-plugin-react-hooks eslint-plugin-react-refresh typescript vite
 
 ```
 
-6. Download PostgreSQL from https://www.postgresql.org/download/ for your OS and generate a password
-
-7. Open a PostgreSQL interactive terminal and connect to kanban_db:
+6. Create the schema and users/tickets tables for kanban-db
 
 ```zsh
+CREATE DATABASE kanban_db;
 
-psql -U postgres
-\l
+-- Connect to the newly created database
 \c kanban_db
-'You are now connected to database "kanban_db" as user "postgres"'
-\i ./server/db/schema.sql
-\i ./server/src/seeds.sql
+
+-- Create the users table
+CREATE TABLE users (
+    id SERIAL PRIMARY KEY,
+    username VARCHAR(255) NOT NULL UNIQUE,
+    password VARCHAR(255) NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Create the tickets table
+CREATE TABLE tickets (
+    id SERIAL PRIMARY KEY,
+    name VARCHAR(255) NOT NULL,
+    status VARCHAR(255) NOT NULL,
+    description VARCHAR(255) NOT NULL,
+    assigned_user_id INTEGER REFERENCES users(id),
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+```
+
+7. Download PostgreSQL from https://www.postgresql.org/download/ for your OS and generate a password
+
+8. Open a PostgreSQL interactive terminal and connect to kanban_db:
+
+```zsh
+psql -h localhost -U postgres -d kanban_db
+\i server/db/schema.sql
 
 ```
 
-8. In root directory run the seed script:
+9. In server directory run the seed script:
 
 ```zsh
 
@@ -78,14 +103,19 @@ npm run seed
 
 ```
 
-9. Create and initialise kanban_db using psql and Sequelize
+10. Create and initialise kanban_db using psql and Sequelize
 
-10. Generate a secure random string to use as JWT secret key and store in .env file. In root directory:
+11. Generate a secure random string to use as JWT secret key and store in .env file. In root directory:
 
 ```zsh
 
 node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 
+```
+11. In root run concurrently server:dev and client:dev:
+
+```zsh
+npm run start:dev
 ```
 
 ## Usage

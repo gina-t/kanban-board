@@ -11,7 +11,7 @@ export const authenticateToken = (req, res, next) => {
             res.sendStatus(403);
             return;
         }
-        req.user = user;
+        req.user = user; // Use the custom interface
         next();
     });
 };

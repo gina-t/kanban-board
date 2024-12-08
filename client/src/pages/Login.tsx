@@ -1,9 +1,10 @@
 import { useState, FormEvent, ChangeEvent } from "react";
-import Auth from '../utils/auth';
-import login from "../api/authAPI";
+import AuthService from '../utils/auth'; // Import the singleton instance of AuthService
+import login from "../api/authAPI"; // Import login function from authAPI
+import { UserLogin } from '../interfaces/UserLogin'; // Import UserLogin interface
 
 const Login = () => {
-  const [loginData, setLoginData] = useState({
+  const [loginData, setLoginData] = useState<UserLogin>({
     username: '',
     password: ''
   });
@@ -20,15 +21,18 @@ const Login = () => {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     try {
+      console.log('Attempting to login with:', loginData); // Log the login data
       const data = await login(loginData);
+      console.log('API response:', data); // Log the API response
       if (data.token) {
-        Auth.login(data.token);
+        AuthService.login(data.token); // Use the singleton instance of AuthService to store the token
         console.log('Login successful, token:', data.token);
       } else {
         setError('Failed to retrieve token');
+        console.error('Failed to retrieve token:', data); // Log the failure
       }
     } catch (err) {
-      console.error('Failed to login', err);
+      console.error('Failed to login:', err);
       setError('Invalid username or password');
     }
   };
@@ -43,6 +47,7 @@ const Login = () => {
           name='username'
           value={loginData.username || ''}
           onChange={handleChange}
+          className='input-field'
         />
         <label>Password</label>
         <input 
@@ -50,9 +55,10 @@ const Login = () => {
           name='password'
           value={loginData.password || ''}
           onChange={handleChange}
+          className='input-field'
         />
-        <button type='submit'>Submit Form</button>
-        {error && <p>{error}</p>}
+        <button type='submit' className='button'>Submit Form</button>
+        {error && <p className='login-notice'>{error}</p>}
       </form>
     </div>
   );

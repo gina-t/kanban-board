@@ -1,6 +1,5 @@
-//ticket model
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
-import { User } from './user.js';
+import { User } from './user';
 
 interface TicketAttributes {
   id: number;

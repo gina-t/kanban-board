@@ -1,4 +1,3 @@
-// user model
 import { DataTypes, Sequelize, Model, Optional } from 'sequelize';
 import bcrypt from 'bcrypt';
 
@@ -36,7 +35,6 @@ export function UserFactory(sequelize: Sequelize): typeof User {
       username: {
         type: DataTypes.STRING,
         allowNull: false,
-        unique: true,
       },
       password: {
         type: DataTypes.STRING,
@@ -51,11 +49,9 @@ export function UserFactory(sequelize: Sequelize): typeof User {
           await user.setPassword(user.password);
         },
         beforeUpdate: async (user: User) => {
-          if (user.changed('password')) {
-            await user.setPassword(user.password);
-          }
+          await user.setPassword(user.password);
         },
-      },
+      }
     }
   );
 

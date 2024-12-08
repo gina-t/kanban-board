@@ -7,29 +7,33 @@ export const login = async (req: Request, res: Response) => {
   const { username, password } = req.body;
 
   try {
-    // Find the user by username
+    console.log('Received login request with:', { username, password }); // Log the login data
+
     const user = await User.findOne({ where: { username } });
+    console.log('User found:', user); // Log the user data
 
     if (!user) {
+      console.log('User not found');
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    // Compare the provided password with the hashed password
     const isPasswordValid = await bcrypt.compare(password, user.password);
+    console.log('Password valid:', isPasswordValid); // Log the password validation result
 
     if (!isPasswordValid) {
+      console.log('Invalid password');
       return res.status(401).json({ message: 'Invalid username or password' });
     }
 
-    // Generate a JWT token
     const token = jwt.sign({ username: user.username }, process.env.JWT_SECRET_KEY as string, {
       expiresIn: '1h',
     });
 
-    // Return the JWT token
+    console.log('Generated token:', token); // Log the generated token
+
     return res.json({ token });
   } catch (error) {
-    console.error(error);
+    console.error('Error during login:', error);
     return res.status(500).json({ message: 'Internal server error' });
   }
 };
