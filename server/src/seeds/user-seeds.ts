@@ -11,11 +11,9 @@ export const seedUsers = async () => {
       { individualHooks: true }
     );
     console.log('Users seeded successfully.');
-    process.exit(0);
   } catch (error) {
     console.error('Error seeding users:', error);
-    process.exit(1);
+    throw error;
   }
 };
 
-seedUsers();

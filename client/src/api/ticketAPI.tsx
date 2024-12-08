@@ -1,6 +1,6 @@
 import { TicketData } from '../interfaces/TicketData';
 import { ApiMessage } from '../interfaces/ApiMessage';
-import Auth from '../utils/auth';
+import AuthService from '../utils/auth';
 
 const retrieveTickets = async () => {
   try {
@@ -9,7 +9,7 @@ const retrieveTickets = async () => {
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${Auth.getToken()}`
+          Authorization: `Bearer ${AuthService.getToken()}`
         }
       }
     );
@@ -33,7 +33,7 @@ const retrieveTicket = async (id: number | null): Promise<TicketData> => {
       {
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${Auth.getToken()}`
+          Authorization: `Bearer ${AuthService.getToken()}`
         }
       }
     );
@@ -57,7 +57,7 @@ const createTicket = async (body: TicketData) => {
         method: 'POST',
           headers: {
             'Content-Type': 'application/json',
-            Authorization: `Bearer ${Auth.getToken()}`
+            Authorization: `Bearer ${AuthService.getToken()}`
           },
         body: JSON.stringify(body)
       }
@@ -84,7 +84,7 @@ const updateTicket = async (ticketId: number, body: TicketData): Promise<TicketD
         method: 'PUT',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${Auth.getToken()}`
+          Authorization: `Bearer ${AuthService.getToken()}`
         },
         body: JSON.stringify(body)
       }
@@ -109,7 +109,7 @@ const deleteTicket = async (ticketId: number): Promise<ApiMessage> => {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${Auth.getToken()}`
+          Authorization: `Bearer ${AuthService.getToken()}`
         }
       }
     )

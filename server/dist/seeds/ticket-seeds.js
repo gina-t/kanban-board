@@ -1,4 +1,4 @@
-import { Ticket } from '../models/ticket';
+import { Ticket } from '../models/ticket.js';
 export const seedTickets = async () => {
     try {
         await Ticket.bulkCreate([
@@ -9,11 +9,9 @@ export const seedTickets = async () => {
             { name: 'Deploy to production', status: 'Todo', description: 'Deploy the application to Render.', assignedUserId: 2 },
         ]);
         console.log('Tickets seeded successfully.');
-        process.exit(0);
     }
     catch (error) {
         console.error('Error seeding tickets:', error);
-        process.exit(1);
+        throw error;
     }
 };
-seedTickets();

@@ -1,4 +1,3 @@
-//ticket model
 import { DataTypes, Model } from 'sequelize';
 export class Ticket extends Model {
 }

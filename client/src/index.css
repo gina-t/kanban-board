@@ -32,9 +32,9 @@ a:hover {
 }
 
 body {
-  background: #ECF0F1;
+  background: linear-gradient(to bottom right, #B4B4B8, #a0b0c0); /* Diagonal gradient with lighter colors */
   background-size: cover;
-  background-repeat: no-repeat no-repeat;
+  background-repeat: no-repeat;
   background-position: center center;
   margin: 0;
   place-items: center;
@@ -43,9 +43,10 @@ body {
 }
 
 h1 {
-  font-size: 3.2em;
+  font-size: 2em;
   line-height: 1.1;
 }
+
 
 button {
   border-radius: 8px;
@@ -57,13 +58,34 @@ button {
   background-color: #1a1a1a;
   cursor: pointer;
   transition: border-color 0.25s;
+  margin-top: -10px;
 }
 button:hover {
   border-color: #646cff;
+  color: #646cff;
 }
 button:focus,
 button:focus-visible {
   outline: 4px auto -webkit-focus-ring-color;
+}
+
+.input-field {
+  border-radius: 8px;
+  border: 1px solid transparent;
+  padding: 0.6em 1.2em;
+  font-size: 1em;
+  font-weight: 500;
+  font-family: inherit;
+  background-color: #ffffff;
+  color:#000000; /* Ensure text is visible on dark background */
+  cursor: text; /* Default cursor for input fields */
+  transition: border-color 0.25s;
+  margin-top: -10px;
+}
+
+.input-field:focus {
+  border-color: #646cff;
+  outline: none; /* Remove default outline */
 }
 
 main {
@@ -84,6 +106,16 @@ tbody tr:nth-child(odd) {
   background-color: #333333;
 }
 
+.login-notice {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2em;
+  color: #646cff; 
+  margin-top: 0; 
+  text-align: center; 
+}
 /* Navbar Content */
 .nav {
   display: flex;
@@ -100,8 +132,9 @@ tbody tr:nth-child(odd) {
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: larger;
+  font-size: 4rem;
   font-weight: 900;
+  margin-right: auto;
 }
 
 .nav-title a {
@@ -112,6 +145,8 @@ tbody tr:nth-child(odd) {
   display: block;
   margin-left: auto;
   list-style: none;
+  margin-top: 20px;
+  margin-right: 10px;
 }
 
 .nav-link {
@@ -181,10 +216,11 @@ tbody tr:nth-child(odd) {
 
 
 .form {
-  width: 60%;
-  height: 80%;
+  width: 50%;
+  height: 50%;
   background-color: #b864c4;
   margin: auto;
+  margin-top: 5%;
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -192,7 +228,7 @@ tbody tr:nth-child(odd) {
 }
 
 .form > h1, .form > label {
-  color: yellow;
+  color: #FCF596;
 }
 
 .form > input {
@@ -242,6 +278,37 @@ tbody tr:nth-child(odd) {
   justify-content: center;
 }
 
+.hero {
+  position: relative;
+  width: 100%;
+  height: 20vh; /* Adjust the height as needed */
+  overflow: hidden;
+}
+
+.hero-image {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.hero-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: white;
+  text-align: center;
+}
+
+.hero-text h1 {
+  font-size: 3em;
+  margin: 0;
+}
+
+.hero-text p {
+  font-size: 1.5em;
+  margin: 0;
+}
 
 @media (prefers-color-scheme: light) {
   :root {
