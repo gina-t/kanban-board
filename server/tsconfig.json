@@ -9,5 +9,5 @@
     // "noEmitOnError": true /* Disable emitting files if any type checking errors are reported. */
   },
   "include": ["src"],
-  "typeRoots": ["./node_modules/@types", "./src/types/express"]
+  "typeRoots": ["./node_modules/@types", "./src/types"]
 }
