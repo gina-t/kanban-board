@@ -131,9 +131,9 @@ npm run build
 ```
 13.Render Configuration
 
-Build command: npm run render-build
+Build Command: npm run render-build
 
-Start command: npm start
+Start Command: npm start
 
 
 ## Usage
