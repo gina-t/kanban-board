@@ -1,6 +1,6 @@
 # kanban-board
 
-Add authentication with JSON Web Token to an existing Kanban board application.
+Add authentication with JSON Web Token to an existing Kanban Board application.
 
 ## Table of Contents
 
@@ -15,7 +15,7 @@ Add authentication with JSON Web Token to an existing Kanban board application.
 
 ## Description
 
-A full stack single page app created with Vite, React, Typescript, Sequelise, JSON Web Token.
+A full stack single page app of a Kanabn Board created with React + Vite + Typescript + Sequelise + JSON Web Token.
 
 ## Installation
 
@@ -59,6 +59,7 @@ npm install --save-dev @types/react @types/react-dom @typescript-eslint @vitejs/
 6. Create the schema and users/tickets tables for kanban-db
 
 ```zsh
+
 CREATE DATABASE kanban_db;
 
 -- Connect to the newly created database
@@ -83,6 +84,7 @@ CREATE TABLE tickets (
     created_at TIMESTAMPTZ DEFAULT NOW(),
     updated_at TIMESTAMPTZ DEFAULT NOW()
 );
+
 ```
 
 7. Download PostgreSQL from https://www.postgresql.org/download/ for your OS and generate a password
@@ -90,6 +92,7 @@ CREATE TABLE tickets (
 8. Open a PostgreSQL interactive terminal and connect to kanban_db:
 
 ```zsh
+
 psql -h localhost -U postgres -d kanban_db
 \i server/db/schema.sql
 
@@ -115,14 +118,32 @@ node -e "console.log(require('crypto').randomBytes(64).toString('hex'))"
 11. In root run concurrently server:dev and client:dev:
 
 ```zsh
+
 npm run start:dev
+
 ```
+12. In root build the app:
+
+```zsh
+npm run build
+
+```
+13. Deploy to Render 
 
 ## Usage
 
-### screenshot 1
-### screenshot 2
-### screenshot 3
+Link to Render deployment and screenshots of app demonstarting functionality:
+
+[](https://kanban-board.onrender.com)
+
+### screenshot-1
+![home page](./client/src/assets/screenshot-1.png)
+
+### screenshot-2
+![login page](./client/src/assets/screenshot-2.png)
+
+### screenshot-3
+![board page](./client/src/assets/screenshot-3.png)
 
 ## License
 
