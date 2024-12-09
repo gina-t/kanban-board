@@ -140,7 +140,7 @@ Start Command: npm start
 
 Link to Render deployment and screenshots of app demonstarting functionality:
 
-[](https://kanban-board.onrender.com)
+[](https://https://kanban-board-3tdv.onrender.com)
 
 ### screenshot-1
 ![home page](./client/src/assets/screenshot-1.png)
